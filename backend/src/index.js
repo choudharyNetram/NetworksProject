@@ -5,7 +5,9 @@ const app = express();
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
+const adminAuthRoute = require('./Routes/AdminAuthRoute'); // Include the new admin route
 const { MONGO_URL, PORT } = process.env;
+
 
 mongoose
   .connect(MONGO_URL, {
@@ -30,7 +32,9 @@ app.use(cookieParser());
 
 app.use(express.json());
 
-app.use("/", authRoute);
+app.use('/', authRoute); // User authentication routes
+app.use('/admin', adminAuthRoute); // Admin authentication routes
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to the server!');
