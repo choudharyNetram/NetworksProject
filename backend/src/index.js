@@ -35,7 +35,6 @@ app.use(express.json());
 app.use('/', authRoute); // User authentication routes
 app.use('/admin', adminAuthRoute); // Admin authentication routes
 
-
 app.get('/', (req, res) => {
   res.send('Welcome to the server!');
 });
