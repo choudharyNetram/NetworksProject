@@ -59,7 +59,7 @@ const AdminSignup = () => {
   };
 
   return (
-    <div className="admin_form_container">
+    <div className="form_container">
       <h2>Admin Signup</h2>
       <form onSubmit={handleSubmit}>
         <div>
