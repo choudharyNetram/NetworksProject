@@ -6,4 +6,5 @@ export {default as AdminHome} from './AdminHome';
 export {default as AdminSignup} from './AdminSignup';
 export {default as MainComponent} from './MainComponent';
 export {default as VisitorForm} from './VisitorForm';
-
+export {default as CurrentVisitors} from './CurrentVisitors' ; 
+export {default as PreviousVisitors} from './PreviousVisitors' ; 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 const AdminHome = () => {
   const navigate = useNavigate();
@@ -10,10 +11,10 @@ const AdminHome = () => {
   const [adminName, setAdminName] = useState("");
 
   useEffect(() => {
-    const verifyCookie = async () => {
-     /* if (!cookies.adminToken) {
+    const verifyCookie = async () => {   
+     if (!cookies.token) {
         navigate("/admin/login");
-      }*/
+      }
       const { data } = await axios.post(
         "http://localhost:3001/admin",
         {},
@@ -25,13 +26,13 @@ const AdminHome = () => {
         ? toast(`Hello Admin ${admin}`, {
             position: "top-right",
           })
-        : (removeCookie("adminToken"), navigate("/admin/login"));
+        : (removeCookie("token"), navigate("/admin/login"));
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 
   const logout = () => {
-    removeCookie("adminToken");
+    removeCookie("token");
     navigate("/admin/login");
   };
 
@@ -42,6 +43,15 @@ const AdminHome = () => {
           {" "}
           Welcome Admin <span>{adminName}</span>
         </h4>
+        <div>
+        <h2>Visitor Management System</h2>
+        <Link to="/current-visitors">
+          <button>Currently Inside Campus</button>
+        </Link>
+        <Link to="/previous-visitors">
+          <button>Previous Visitors</button>
+        </Link>
+      </div>
         <button onClick={logout}>LOGOUT</button>
       </div>
       <ToastContainer />

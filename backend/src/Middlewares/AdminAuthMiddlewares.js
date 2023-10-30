@@ -1,5 +1,3 @@
-
-
 const Admin = require('../Models/AdminModel'); // Replace 'AdminModel' with the actual model for admin accounts
 require('dotenv').config();
 const jwt = require('jsonwebtoken');

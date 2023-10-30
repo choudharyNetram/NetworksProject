@@ -1,6 +1,10 @@
 const Admin = require('../Models/AdminModel'); // Replace 'AdminModel' with the actual model for admin accounts
 const bcrypt = require('bcryptjs');
 const { createSecretToken } = require('../util/SecretToken');
+
+const express = require('express');
+const router = express.Router();
+
 require('dotenv').config();
 
 module.exports.adminSignup = async (req, res, next) => {
@@ -68,3 +72,6 @@ module.exports.adminLogin = async (req, res, next) => {
     }
 };
   
+// VisitorController.js
+
+//const { createSecretToken } = require('../utils/tokenUtils'); // If you have token creation utility

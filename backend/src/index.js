@@ -7,7 +7,8 @@ const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const adminAuthRoute = require('./Routes/AdminAuthRoute'); // Include the new admin route
 const { MONGO_URL, PORT } = process.env;
-
+const visitorRoute = require('./Routes/VisitorRoute') ; 
+const bodyParser = require('body-parser');
 
 mongoose
   .connect(MONGO_URL, {
@@ -30,11 +31,16 @@ app.use(
 );
 app.use(cookieParser());
 
+app.use(bodyParser.json());
+
+// Use the visitor checkout route
+//app.use('/visitor/checkout', visitorCheckoutRouter);
+
 app.use(express.json());
 
 app.use('/', authRoute); // User authentication routes
 app.use('/admin', adminAuthRoute); // Admin authentication routes
-
+app.use('/visitor', visitorRoute) ; 
 app.get('/', (req, res) => {
   res.send('Welcome to the server!');
 });

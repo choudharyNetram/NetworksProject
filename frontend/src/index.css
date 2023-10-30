@@ -270,3 +270,25 @@ button[type="submit"] {
 }
 
 /* Add more specific CSS rules as needed for your styling */
+.visitor-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.visitor-table th, .visitor-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.visitor-table th {
+  background-color: #f2f2f2;
+}
+
+.visitor-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.visitor-table tr:hover {
+  background-color: #ddd;
+}
