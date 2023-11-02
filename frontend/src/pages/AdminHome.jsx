@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
+import '../styles/all.css';
 
 const AdminHome = () => {
   const navigate = useNavigate();
@@ -35,7 +36,9 @@ const AdminHome = () => {
     removeCookie("token");
     navigate("/admin/login");
   };
-
+/*  <Route path="/admin/student-visitorform" element={<StudentVisitorForm />} />
+        <Route path="/current-student-visitors" element={<CurrentStudentVisitors />} />
+        <Route path="/previous-student-visitors" element={<PreviousSt */
   return (
     <>
       <div className="home_page">
@@ -43,6 +46,7 @@ const AdminHome = () => {
           {" "}
           Welcome Admin <span>{adminName}</span>
         </h4>
+        
         <div>
         <h2>Visitor Management System</h2>
         <Link to="/current-visitors">
@@ -50,6 +54,18 @@ const AdminHome = () => {
         </Link>
         <Link to="/previous-visitors">
           <button>Previous Visitors</button>
+        </Link>
+        <Link to="/current-student-visitors">
+          <button>Student Related Current Visitors</button>
+        </Link>
+        <Link to="/previous-student-visitors">
+          <button>Student Related Previous Visitors</button>
+        </Link>
+        <Link to="/admin/visitorform">
+          <button> Visitors Form </button>
+        </Link>
+        <Link to="/admin/student-visitorform">
+          <button> Student Visitors Form </button>
         </Link>
       </div>
         <button onClick={logout}>LOGOUT</button>

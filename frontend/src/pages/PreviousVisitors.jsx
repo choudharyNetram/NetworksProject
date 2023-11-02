@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/visitors.css' ; 
+import '../styles/all.css';
 
 import { useCookies } from 'react-cookie';
 const PreviousVisitors = () => {

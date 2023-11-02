@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/visitors.css' ; 
+import '../styles/all.css';
 
-const CurrentVisitors = () => {
-  const [currentVisitors, setCurrentVisitors] = useState([]);
+const CurrentStudentVisitors = () => {
+  const [currentStudentVisitors, setStudentCurrentVisitors] = useState([]);
   const handleCheckout = (visitorId) => {
     // Implement checkout functionality here
     const currentDateTime = new Date();
@@ -30,8 +31,8 @@ const CurrentVisitors = () => {
   
   useEffect(() => {
     // Fetch data for current visitors from the backend
-    axios.get('http://localhost:3001/visitor/current').then((response) => {
-      setCurrentVisitors(response.data);
+    axios.get('http://localhost:3001/visitor/student-current').then((response) => {
+      setStudentCurrentVisitors(response.data);
     });
   }, []);
 
@@ -41,26 +42,30 @@ const CurrentVisitors = () => {
       <table className="visitor-table">
         <thead>
           <tr>
+          <th>Date</th>
             <th>Name</th>
             <th>Mobile Number</th>
-            <th>Whom to Meet</th>
-            <th>Date</th>
-            <th>Coming From</th>
-            <th>Vehicle No</th>
+            <th>Student-Name</th>
+            <th>Student Mob. no.</th>
+            <th>Department </th>
+            <th> Hostel Room no.</th>
+            <th>Address </th>
             <th>In Time</th>
             <th>Checkout</th>
 
           </tr>
         </thead>
         <tbody>
-          {currentVisitors.map((visitor) => (
+          {currentStudentVisitors.map((visitor) => (
             <tr key={visitor._id}>
+               <td>{visitor.date.split('T')[0]}</td>
               <td>{visitor.name}</td>
               <td>{visitor.mobileNo}</td>
-              <td>{visitor.whomToMeet}</td>
-              <td>{visitor.date.split('T')[0]}</td>
-              <td>{visitor.comingFrom}</td>
-              <td>{visitor.vehicleNo}</td>
+              <td>{visitor.studentName}</td>
+              <td>{visitor.studentMobileNo}</td>
+              <td> {visitor.department} </td>
+              <td> {visitor.hostelRoomNo} </td>
+              <td>{visitor.address}</td>
               <td>{visitor.inTime}</td>
               <td>
               <button onClick={() => handleCheckout(visitor._id)}>Checkout</button>
@@ -76,5 +81,5 @@ const CurrentVisitors = () => {
   );
 };
 
-export default CurrentVisitors;
+export default CurrentStudentVisitors;
 

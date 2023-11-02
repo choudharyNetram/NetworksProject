@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
-// Define a schema for the second dataset (DataDisplay2)
+// Define a schema for the second dataset 
 const studentVisitorSchema = new mongoose.Schema({
-  date: { type: Date, required: true },
-  name: { type: String, required: true },
-  mobileNo: { type: String, required: true },
-  address: { type: String, required: true },
-  studentName: { type: String, required: true },
-  studentMobileNo: { type: String, required: true },
-  department: { type: String, required: true },
-  hostelRoomNo: { type: String, required: true },
-  inTime: { type: Date, required: true },
-  outTime: { type: Date },
+  date: { type: Date},
+  name: { type: String},
+  mobileNo: { type: String },
+  address: { type: String },
+  studentName: { type: String },
+  studentMobileNo: { type: String },
+  department: { type: String},
+  hostelRoomNo: { type: String  },
+  inTime: { type: String },
+  outTime: { type: String },
 });
 
-// Create a Mongoose model for the DataDisplay2 data
+// Create a Mongoose model for the Student related visitors data
 const studentVisitor= mongoose.model('studentVisitor', studentVisitorSchema);
 
 module.exports = studentVisitor;

@@ -1,8 +1,7 @@
 // visitorController.js
 
 const Visitor = require('../Models/VisitorsModel'); // Import the Mongoose schema
-//const DataDisplay1 = require('../models/VisitorsModel'); // Import the Mongoose model
-const DataDisplay2 = require('../Models/StudentVisitor'); // Import the Mongoose model
+const studentVisitor = require('../Models/StudentVisitor'); // Import the Mongoose model
 
 module.exports.addVisitor = async (req, res) => {
   try {
@@ -33,6 +32,45 @@ module.exports.addVisitor = async (req, res) => {
     await newVisitor.save();
 
     res.status(201).json({ message: 'Visitor added successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error adding visitor', error: error.message });
+  }
+};
+
+
+module.exports.addStudentVisitor = async (req, res) => {
+  try {
+    const {
+      date,
+      name,
+      mobileNo,
+      address,
+      studentName,
+      studentMobileNo,
+      department, 
+      hostelRoomNo , 
+      inTime, // String format: "hh:mm AM/PM"
+      outTime, // String format: "hh:mm AM/PM"
+    } = req.body;
+
+    // Create a new visitor record with the input data
+    const newStdVisitor = new studentVisitor({
+      date,
+      name,
+      mobileNo,
+      address,
+      studentName,
+      studentMobileNo,
+      department, 
+      hostelRoomNo , 
+      inTime, // String format: "hh:mm AM/PM"
+      outTime
+    });
+
+    // Save the new visitor record to the database
+    await newStdVisitor.save();
+
+    res.status(201).json({ message: 'Student  Visitor added successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error adding visitor', error: error.message });
   }

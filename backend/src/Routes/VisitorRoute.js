@@ -4,14 +4,16 @@ const express = require('express');
 const router = express.Router();
 const Visitor = require('../Models/VisitorsModel'); // Import the Visitor model
 const { adminVerification } = require('../Middlewares/VisitorMiddlewares'); // Import the admin cookie verification middleware
-//const visitorController = require('../Controllers/VisitorController');
 
+const studentVisitor = require('../Models/StudentVisitor'); // Import the Visitor model
 
 const visitor = require('../Controllers/Visitors'); // Create this admin controller if not already done
 
 // Visitor registration route, no admin authentication needed
 router.post('/add-visitor', visitor.addVisitor);
+router.post('/add-student-visitor', visitor.addStudentVisitor);
 
+  
 // Middleware to verify admin cookie - Applied only to routes that require admin authentication
 //router.use(adminVerification);
 
@@ -35,6 +37,26 @@ router.get('/previous', async (req, res) => {
   }
 });
 
+// Get current visitors - Requires admin authentication
+router.get('/student-current', async (req, res) => {
+  try {
+    const currentStudentVisitors = await studentVisitor.find({ outTime: '' }); // Visitors with no outTime
+    res.json(currentStudentVisitors);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get previous visitors - Requires admin authentication
+router.get('/student-previous', async (req, res) => {
+  try {
+    const previousStudentVisitors = await studentVisitor.find({ outTime: { $ne: '' } }); // Visitors with outTime
+    res.json(previousStudentVisitors);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Import required modules
 
 
@@ -45,8 +67,8 @@ router.put('/checkout/:visitorId', async (req, res) => {
 
     // Find the visitor in the database by ID
     const visitor = await Visitor.findById(visitorId);
-
-    if (!visitor) {
+    const stdVisitor = await studentVisitor.findById(visitorId) ; 
+    if (!visitor || !stdVisitor) {
       return res.status(404).json({ message: 'Visitor not found' });
     }
 
@@ -55,10 +77,18 @@ router.put('/checkout/:visitorId', async (req, res) => {
     const outTime = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // Update the visitor's outTime
-    visitor.outTime = outTime;
+    if(visitor){
+      visitor.outTime = outTime;
+      await visitor.save();
+    }
+    else {
+      stdVisitor.outTime = outTime;
+      await stdVisitor.save();
+    }
+   
 
     // Save the changes to the database
-    await visitor.save();
+   
 
     res.status(200).json({ message: 'Visitor checked out successfully', visitor });
   } catch (error) {
