@@ -61,6 +61,7 @@ router.get('/student-previous', async (req, res) => {
 
 
 // Define the route for visitor checkout
+
 router.put('/checkout/:visitorId', async (req, res) => {
   try {
     const { visitorId } = req.params;
@@ -68,7 +69,7 @@ router.put('/checkout/:visitorId', async (req, res) => {
     // Find the visitor in the database by ID
     const visitor = await Visitor.findById(visitorId);
     const stdVisitor = await studentVisitor.findById(visitorId) ; 
-    if (!visitor || !stdVisitor) {
+    if (!(visitor || stdVisitor)) {
       return res.status(404).json({ message: 'Visitor not found' });
     }
 
@@ -81,15 +82,12 @@ router.put('/checkout/:visitorId', async (req, res) => {
       visitor.outTime = outTime;
       await visitor.save();
     }
-    else {
+
+    if(stdVisitor) {
       stdVisitor.outTime = outTime;
       await stdVisitor.save();
     }
-   
-
     // Save the changes to the database
-   
-
     res.status(200).json({ message: 'Visitor checked out successfully', visitor });
   } catch (error) {
     console.error(error);

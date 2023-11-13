@@ -22,7 +22,7 @@ body {
   
   label {
     font-size: 1.2rem;
-    color: #656262;
+    color: white;
   }
   
   html,
@@ -35,63 +35,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 212, 255, 1) 0%,
-      rgba(0, 212, 255, 1) 50%,
-      rgba(0, 212, 255, 1) 100%
-    );
+    background: white ; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  
-  .form_container {
-    background-color: #fff;
-    padding: 2rem 3rem;
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
-  }
-  
-  .form_container > h2 {
-    margin-block: 1rem;
-    padding-block: 0.6rem;
-    color: rgba(0, 212, 255, 1);
-  }
-  
-  .form_container > form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-  }
-  
-  .form_container div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-  
-  .form_container input {
-    border: none;
-    padding: 0.5rem;
-    border-bottom: 1px solid gray;
-    font-size: 1.1rem;
-    outline: none;
-  }
-  
-  .form_container input::placeholder {
-    font-size: 0.9rem;
-    font-style: italic;
-  }
-  
-  .form_container button {
-    background-color: rgba(0, 212, 255, 1);
-    color: #fff;
-    border: none;
-    padding: 0.6rem;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 0.3rem;
   }
   
   span a {
@@ -102,8 +47,8 @@ body {
   .home_page {
     height: 100vh;
     width: 100vw;
-    background: #000;
-    color: white;
+    background: white;
+    color: rgb(0, 94, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,12 +59,12 @@ body {
   }
   
   .home_page span {
-    color: rgba(0, 212, 255, 1);
+    color: white;
   }
   
   .home_page button {
-    background-color: rgb(27, 73, 83);
-    color: #fff;
+    background-color: white;
+    color: blue;
     cursor: pointer;
     padding: 1rem 3rem;
     font-size: 2rem;
@@ -129,25 +74,15 @@ body {
   }
   
   .home_page button:hover {
-    background-color: rgba(0, 212, 255, 1);
+    background-color: blue ; 
   }
   
-  
-  @media only screen and (max-width: 1200px){
-    .home_page{
-      font-size: 1.5rem;
-    }
-    .home_page button {
-      padding: 0.6rem 1rem;
-      font-size: 1.5rem;
-    }
-  }
   
   
   /* Define a consistent color palette */
   :root {
     --primary-color: rgba(0, 212, 255, 1);
-    --background-color: #000;
+    --background-color: white;
   }
   
   /* Enhance button hover effect */
@@ -163,330 +98,7 @@ body {
   
   /* Add background gradient to buttons */
   .home_page button {
-    background: linear-gradient(90deg, var(--primary-color) 0%, #000 100%);
-    color: white;
+    background-color: #808080;
+    color: black;
   }
   
-  /* Apply shadows to containers */
-  .form_container {
-    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 0.7);
-  }
-  
-  /* Improved spacing and layout */
-  .form_container,
-  .home_page {
-    padding: 2rem;
-    margin: 1rem;
-  }
-  
-  /* Responsive design adjustments */
-  @media only screen and (max-width: 1200px) {
-    .home_page {
-      font-size: 1.5rem;
-      padding: 1rem;
-    }
-    .home_page button {
-      padding: 0.6rem 1rem;
-      font-size: 1.5rem;
-    }
-  }
-  
-  
-  /* Add this CSS to your stylesheets or inline style in your React component */
-  
-  .data-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .data-table th,
-  .data-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .data-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .table-row {
-    background-color: #f9f9f9;
-  }
-  
-  /* Add more styling as needed to match your UI design. */
-  /* Add this CSS to your stylesheets or inline style in your React component */
-  
-  .data-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .data-table th,
-  .data-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .data-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .table-row {
-    background-color: #f9f9f9;
-  }
-  
-  /* Add more styling as needed to match your UI design. */
-  /* CSS for Input Fields */
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  /* CSS for Form Container */
-  .form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  /* CSS for Submit Button */
-  button[type="submit"] {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  /* Add more specific CSS rules as needed for your styling */
-  .visitor-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .visitor-table th, .visitor-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .visitor-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .visitor-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .visitor-table tr:hover {
-    background-color: #ddd;
-  }
-  /* Navbar Section*/
-#navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    inset: 0px 0px auto 0px;
-    padding: 3rem 6rem;
-    color: red;
-    position: relative;
-    z-index: 1;
-  }
-  
-  #navbar.active{
-    position: sticky;
-  }
-  
-  #navbar ul{
-    display: flex;
-  }
-  
-  .navbar-item, .nav-item{
-    list-style: none;
-    margin: 0px 10px;
-    font-size: 1rem;
-    color: white;
-  }
-  
-  .navbar-item a, .nav-item a{
-    text-decoration: none;
-    color: white;
-  }
-  
-  .navbar-item a:hover, .nav-item a:hover{
-    color: var(--red);
-  }
-  
-  .navbar-item a:after, .nav-item a:after{    
-    background: none repeat scroll 0 0 transparent;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: relative;
-    background: var(--red);
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-  }
-  
-  .navbar-item a:hover:after, .nav-item a:hover:after{ 
-    width: 100%; 
-    left: 0; 
-  }
-  
-  .hamburger{
-    cursor: pointer;
-    z-index: 3;
-  }
-  
-  .bar{
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px 10px;
-    border-radius: 1.5px;
-    transition: all 0.5s ease;
-    background-color: white;
-  }
-  
-  .hamburger.active .bar:nth-child(2){
-    opacity: 0;
-  }
-  
-  .hamburger.active .bar:nth-child(1){
-    transform: translateY(8px) rotate(45deg);
-  }
-  
-  .hamburger.active .bar:nth-child(3){
-    transform: translateY(-8px) rotate(-45deg);
-  }
-  
-  .ham-menu{
-    display: flex;
-    align-items: center;
-    position: fixed;
-    bottom: -120%;
-    right: 0px;
-    background-color: #ED4146;
-    width: 50%;
-    height: 100%;
-    transition: 0.5s;
-    z-index: 2;
-  }
-  
-  .ham-menu.active{
-    bottom: 0px;
-  }
-  
-  .ham-container{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 6rem;
-    width: 100%;
-  }
-  
-  .ham-container ul{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    min-width: 210px;
-    margin-bottom: 5px;
-  }
-  
-  .ham-item{
-    list-style: none;
-    margin: 7.5px 0px;
-    color: white;
-  }
-  
-  .ham-item a{
-    text-decoration: none;
-    color: white;
-    font-size: 1.5rem;
-  }
-  
-  .subham-item a{
-    text-decoration: none;
-    color: white;
-    font-size: 1.25rem;
-  }
-  
-  .backdrop{
-    position: fixed;
-    top: -100%;
-    left: 0px;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    transition: 0.5s;
-    z-index: 1;
-    opacity: 0.6;
-  }
-  
-  .backdrop.active{
-    top: 0px;
-  }
-  
-  /* Responsive Section */
-  @media screen and (max-width: 900px) {
-    #navbar{
-      padding: 3rem;
-    }
-    .ham-container{
-      margin: 3rem;
-    }
-  }
-  
-  @media screen and (max-width: 753px) {
-    .navbar-item a{
-      display: none;
-    }
-  }
-  
-  @media screen and (max-width: 590px) {
-    .ham-item a{
-      font-size: 1rem;
-    }
-    .subham-item a{
-      font-size: 0.85rem;
-    }
-  }
-  
-  @media screen and (max-width: 450px) {
-    #navbar{
-      padding: 1.5rem;
-    }
-    .navbar-item{
-      font-size: 0.75rem;
-    }
-    .ham-container{
-      margin: 1.5rem;
-    }
-  }
-  
-  @media screen and (max-width: 360px) {
-    .ham-item a{
-      font-size: 0.75rem;
-    }
-    .subham-item a{
-      font-size: 0.65rem;
-    }
-  }
-  
-  @media screen and (max-height: 871px) {
-    .ham-item{
-      margin: 5px;
-    }
-  }

@@ -9,47 +9,61 @@ export default function Navbar() {
   }
   const Links = document.getElementsByClassName("linkEventListener");
   for (let index = 0; index < Links.length; index++) {
-    const link = Links[index];
-    link.addEventListener("click", () => {
-      Toggle();
-    });
+      const link = Links[index];
+      link.addEventListener("click", () => {
+        Toggle();
+      });
   }
 
   return (
     <div id="navbar" className={`h-semibold ${isActive ? "active" : ""}`}>
-      <ul>
-        <li className="nav-item"><Link to="/">Visitors Management System</Link></li>
-      </ul>
-      <ul>
 
-      <li className="navbar-item"><Link to="/">Home</Link></li>
 
-<li className="navbar-item"><Link to="/login">Login</Link></li>
+         <div className={`hamburger ${isActive ? "active" : ""}`} onClick={Toggle}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+        </div>
 
-<li className="navbar-item"><Link to="/signup">Signup</Link></li>
-
-<li className="navbar-item"><Link to="/admin">Admin Home</Link></li>
-
-<li className="navbar-item"><Link to="/admin/login">Admin Login</Link></li>
-
-<li className="navbar-item"><Link to="/admin/signup">Admin Signup</Link></li>
-
-<li className="navbar-item"><Link to="/admin/dashboard">Admin Dashboard</Link></li>
-
-<li className="navbar-item"><Link to="/admin/visitorform">Visitor Form</Link></li>
-<li className="navbar-item"><Link to="/current-visitors">Current Visitors</Link></li>
-
-<li className="navbar-item"><Link to="/previous-visitors">Previous Visitors</Link></li>
-
-<li className="navbar-item"><Link to="/admin/student-visitorform">Student Visitor Form</Link></li>
-
-<li className="navbar-item"><Link to="/current-student-visitors">Current Student Visitors</Link></li>
-
-<li className="navbar-item"><Link to="/previous-student-visitors">Previous Student Visitors</Link></li>
-</ul>
-
+        <div className={`ham-menu ${isActive ? "active" : ""}`}>
+        <div className="ham-container">
+          <ul className="ham-subcontainer">
+            <li className="ham-item">
+              <Link to="/" className="ham-link linkEventListener">Home</Link>
+            </li>
+            <li className="ham-item">
+              <Link to="/login" className="ham-link linkEventListener">Login</Link>
+            </li>
+            <li className="ham-item">
+              <Link to="/signup" className="ham-link linkEventListener">Signup</Link>
+            </li>
+            <li className="ham-item">
+              <Link to="/current-visitors" className="ham-link linkEventListener">Current Visitors</Link>
+            </li>
+              <li className="ham-item">
+                <Link to="/previous-visitors" className="ham-link linkEventListener">Previous Visitors</Link>
+              </li>
+              <li className="ham-item">
+                <Link to="/current-student-visitors" className="ham-link linkEventListener">Current Student Visitors</Link>
+              </li>
+              <li className="ham-item">
+                <Link to="/previous-student-visitors" className="ham-link linkEventListener">Previous Student Visitors</Link>
+              </li>
+              <li className="ham-item">
+                <Link to="/admin/student-visitorform" className="ham-link linkEventListener">Student Visitor Form</Link>
+              </li>
+              <li className="ham-item">
+                <Link to="/admin/visitorform" className="ham-link linkEventListener">Visitor Form</Link>
+              </li>
+              
        
-    
+         </ul>
+        
+        </div>
+
+        </div>
+     
+       
       <div className={`backdrop ${isActive ? "active" : ""}`}></div>
 
     </div>
@@ -58,41 +72,24 @@ export default function Navbar() {
 
 
 /*  
-        <div className={`hamburger ${isActive ? "active" : ""}`} onClick={Toggle}>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </div>
-      </ul>
-      <div className={`ham-menu ${isActive ? "active" : ""}`}>
-        <div className="ham-container">
-          <ul className="ham-subcontainer">
-            <li className="ham-item">
-              <Link to="/" className="ham-link linkEventListener">Home</Link>
-            </li>
-            <li className="ham-item">
-              <Link to="/council" className="ham-link linkEventListener">Council</Link>
-            </li>
-            <li className="ham-item">
-              <Link to="/events" className="ham-link linkEventListener">Events</Link>
-            </li>
-            <li className="ham-item">
-              <Link to="/experiences" className="ham-link linkEventListener">Experiences</Link>
-            </li>
-            <ul>
-              <li className="subham-item">
-                <Link to="/quill" className="ham-link linkEventListener">The Quill</Link>
-              </li>
-              <li className="subham-item">
-                <Link to="/student-archive" className="ham-link linkEventListener">Student Archive</Link>
-              </li>
-              <li className="subham-item">
-                <Link to="/alumni-corner" className="ham-link linkEventListener">Alumni Corner</Link>
-              </li>
-              <li className="subham-item">
-                <Link to="/QnA" className="ham-link linkEventListener">QnA with Faculty</Link>
-              </li>
-            </ul>
-          </ul>
-         
-        </div>*/
+         <ul>
+      <li className="navbar-item"><Link to="/">Home</Link></li>
+
+      <li className="navbar-item"><Link to="/login">Login</Link></li>
+
+      <li className="navbar-item"><Link to="/signup">Signup</Link></li>
+
+      <li className="navbar-item"><Link to="/current-visitors">Current Visitors</Link></li>
+
+      <li className="navbar-item"><Link to="/previous-visitors">Previous Visitors</Link></li>
+
+      <li className="navbar-item"><Link to="/current-student-visitors">Current Student Visitors</Link></li>
+
+      <li className="navbar-item"><Link to="/previous-student-visitors">Previous Student Visitors</Link></li>
+      <li className="navbar-item"><Link to="/admin/student-visitorform">Student Visitor Form</Link></li>
+      <li className="navbar-item"><Link to="/admin/visitorform">Visitor Form</Link></li>
+
+</ul>
+
+      
+     */

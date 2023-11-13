@@ -4,8 +4,12 @@ import axios from 'axios';
 import '../styles/visitors.css' ; 
 import '../styles/all.css';
 
+import { useCookies } from 'react-cookie';
+
 const CurrentStudentVisitors = () => {
   const [currentStudentVisitors, setStudentCurrentVisitors] = useState([]);
+  const[cookies] = useCookies(['token']) ; 
+
   const handleCheckout = (visitorId) => {
     // Implement checkout functionality here
     const currentDateTime = new Date();
@@ -30,11 +34,23 @@ const CurrentStudentVisitors = () => {
   };
   
   useEffect(() => {
+    const token = cookies.token ; 
+
     // Fetch data for current visitors from the backend
-    axios.get('http://localhost:3001/visitor/student-current').then((response) => {
-      setStudentCurrentVisitors(response.data);
-    });
-  }, []);
+    if(token){
+      axios.get('http://localhost:3001/visitor/student-current', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setStudentCurrentVisitors(response.data);
+      })
+      .catch((error)=>{
+        console.error(error) ; 
+      });
+  }
+  }, [cookies]);
 
   return (
     <div>

@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  isApproved: {
+    type: Boolean,
+    default: false, // Initially set to unapproved
+  },
 });
 
 userSchema.pre("save", async function () {

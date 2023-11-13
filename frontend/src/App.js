@@ -12,24 +12,25 @@ import Navbar from './pages/Navbar' ;
 function App() {
   return (
     <div className="App">
-      <Navbar/> 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={ <Home /> } />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/signup" element={<AdminSignup />} />
-        <Route path="/admin/visitorform" element={<VisitorForm />} />
-        <Route path="/current-visitors" element={<CurrentVisitors />} />
-        <Route path="/previous-visitors" element={<PreviousVisitors />} />
-        <Route path="/admin/student-visitorform" element={<StudentVisitorForm />} />
-        <Route path="/current-student-visitors" element={<CurrentStudentVisitors />} />
-        <Route path="/previous-student-visitors" element={<PreviousStudentVisitors />} />
+        <Route path="/admin/visitorform" element={<div>  <Navbar/>  <VisitorForm />  </div>} />
+        <Route path="/current-visitors" element={<div>  <Navbar/>  <CurrentVisitors />  </div>} />
+        <Route path="/previous-visitors" element={<div>  <Navbar/>  <PreviousVisitors />  </div>} />
+        <Route path="/admin/student-visitorform" element={<div>  <Navbar/>  <StudentVisitorForm /> </div>} />
+        <Route path="/current-student-visitors" element={<div>  <Navbar/> <CurrentStudentVisitors /></div>} />
+        <Route path="/previous-student-visitors" element={<div>  <Navbar/>  <PreviousStudentVisitors /></div>} />
 
       </Routes>
     </div>
   );
 }
+
+
 
 export default App;

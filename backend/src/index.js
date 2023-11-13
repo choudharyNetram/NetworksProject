@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const adminAuthRoute = require('./Routes/AdminAuthRoute'); // Include the new admin route
 const { MONGO_URL, PORT } = process.env;
-const visitorRoute = require('./Routes/VisitorRoute') ; 
+const visitorRoute = require('./Routes/NewVisitor') ; 
 const bodyParser = require('body-parser');
 
 mongoose

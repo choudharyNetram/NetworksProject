@@ -12,10 +12,11 @@ const AdminHome = () => {
   const [adminName, setAdminName] = useState("");
 
   useEffect(() => {
-    const verifyCookie = async () => {   
-     if (!cookies.token) {
+    const verifyCookie = async () => {  
+      /* 
+     if (!cookies.adminToken) {
         navigate("/admin/login");
-      }
+      }*/
       const { data } = await axios.post(
         "http://localhost:3001/admin",
         {},
@@ -27,13 +28,13 @@ const AdminHome = () => {
         ? toast(`Hello Admin ${admin}`, {
             position: "top-right",
           })
-        : (removeCookie("token"), navigate("/admin/login"));
+        : (removeCookie("adminToken"), navigate("/admin/login"));
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 
   const logout = () => {
-    removeCookie("token");
+    removeCookie("adminToken");
     navigate("/admin/login");
   };
 /*  <Route path="/admin/student-visitorform" element={<StudentVisitorForm />} />
@@ -141,3 +142,43 @@ const AdminHome = () => {
 
 export default AdminHome;
 */
+
+/*
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { Link } from 'react-router-dom';
+
+const AdminHome = () => {
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies([]);
+  const [adminName, setAdminName] = useState("");
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      if (!cookies.adminToken) {
+    const verifyCookie = async () => {   
+     if (!cookies.token) {
+        navigate("/admin/login");
+      }
+    }
+    const { data } = await axios.post(
+      "http://localhost:3001/admin",
+      {},
+    const AdminHome = () => {
+      ? toast(`Hello Admin ${admin}`, {
+          position: "top-right",
+        })
+      : (removeCookie("adminToken"), navigate("/admin/login"));
+      : (removeCookie("token"), navigate("/admin/login"));
+  };
+  verifyCookie();
+}, [cookies, navigate, removeCookie]);
+
+const logout = () => {
+  removeCookie("adminToken");
+  removeCookie("token");
+  navigate("/admin/login");
+};
+
+    */

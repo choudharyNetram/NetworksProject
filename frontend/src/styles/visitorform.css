@@ -1,0 +1,101 @@
+
+  /* Apply shadows to containers */
+  .form_container {
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 0.7);
+  }
+  
+  /* Improved spacing and layout */
+  .form_container,
+  .home_page {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  
+  
+  /* Add more styling as needed to match your UI design. */
+  /* CSS for Input Fields */
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* CSS for Form Container */
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  .form-group, label {
+    color: black;
+    
+   
+  }
+  /* CSS for Submit Button */
+  button[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  
+  .form_container {
+    background-color: #fff;
+    padding: 2rem 3rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  }
+  
+  .form_container > h2 {
+    margin-block: 1rem;
+    padding-block: 0.6rem;
+    color: rgba(0, 212, 255, 1);
+  }
+  
+  .form_container > form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+  
+  .form_container div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .form_container input {
+    border: none;
+    padding: 0.5rem;
+    border-bottom: 1px solid gray;
+    font-size: 1.1rem;
+    outline: none;
+  }
+  
+  .form_container input::placeholder {
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  
+  .form_container button {
+    color: #fff;
+    border: none;
+    padding: 0.6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+  }
+  
