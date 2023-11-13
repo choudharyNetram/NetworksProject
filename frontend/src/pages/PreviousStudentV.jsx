@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 const PreviousStudentVisitors = () => {
   const [previousStudentVisitors, setPreviousStudentVisitors] = useState([]);
   const [cookies] = useCookies(['token']);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const token = cookies.token;
@@ -30,9 +31,32 @@ const PreviousStudentVisitors = () => {
     }
   }, [cookies]);
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    const token = cookies.token;
+    // Fetch visitors based on the search query
+    axios.get(`http://localhost:3001/visitor/search/s?q=${e.target.value}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setPreviousStudentVisitors(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       <h2>Students Related Previous Visitors</h2>
+      <input 
+        type="text" 
+        placeholder="Search..." 
+        value={searchQuery} 
+        onChange={handleSearch} 
+      />
       <table className="visitor-table">
         <thead>
           <tr>
@@ -50,7 +74,9 @@ const PreviousStudentVisitors = () => {
         </thead>
         <tbody>
           {Array.isArray(previousStudentVisitors) ? (
-            previousStudentVisitors.map((visitor) => (
+            previousStudentVisitors
+            .filter(visitor => visitor.outTime != "")
+            .map((visitor) => (
               <tr key={visitor._id}>
                 <td>{visitor.date.split('T')[0]}</td>
                 <td>{visitor.name}</td>

@@ -9,7 +9,7 @@ import { useCookies } from 'react-cookie';
 const CurrentStudentVisitors = () => {
   const [currentStudentVisitors, setStudentCurrentVisitors] = useState([]);
   const[cookies] = useCookies(['token']) ; 
-
+  const [searchQuery, setSearchQuery] = useState('');
   const handleCheckout = (visitorId) => {
     // Implement checkout functionality here
     const currentDateTime = new Date();
@@ -52,9 +52,32 @@ const CurrentStudentVisitors = () => {
   }
   }, [cookies]);
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    const token = cookies.token;
+    // Fetch visitors based on the search query
+    axios.get(`http://localhost:3001/visitor/search/s?q=${e.target.value}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setStudentCurrentVisitors(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
-      <h2>Currently Inside Campus</h2>
+      <h2>Student Visitors Currently Inside Campus</h2>
+      <input 
+        type="text" 
+        placeholder="Search..." 
+        value={searchQuery} 
+        onChange={handleSearch} 
+      />
       <table className="visitor-table">
         <thead>
           <tr>
@@ -68,11 +91,12 @@ const CurrentStudentVisitors = () => {
             <th>Address </th>
             <th>In Time</th>
             <th>Checkout</th>
-
           </tr>
         </thead>
         <tbody>
-          {currentStudentVisitors.map((visitor) => (
+          {currentStudentVisitors
+          .filter(visitor => visitor.outTime === "")
+          .map((visitor) => (
             <tr key={visitor._id}>
                <td>{visitor.date.split('T')[0]}</td>
               <td>{visitor.name}</td>

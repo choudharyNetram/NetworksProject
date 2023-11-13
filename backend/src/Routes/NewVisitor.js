@@ -12,20 +12,47 @@ const visitor = require('../Controllers/NewVisitors'); // Create this admin cont
 router.post('/add-visitor', visitor.addVisitor);
 router.post('/add-student-visitor', visitor.addStudentVisitor);
 
+
+ /// the below code is for searching for the student type visitors: 
 /*
-router.get('/search', async (req, res) => {
-  const searchParams = req.query;
+router.get('/search/s', async (req, res) => {
+  const searchQuery = req.query.q;
 
   try {
     const searchCriteria = {};
 
-    // Loop through query parameters and build the search criteria
-    Object.keys(searchParams).forEach((param) => {
-      if (studentVisitor.schema.obj[param]) {
-        // Check if the parameter is a valid field in the schema
-        searchCriteria[param] = { $regex: new RegExp(searchParams[param], 'i') };
-      }
-    });
+    if (searchQuery) {
+      // Define specific fields to search within
+      const searchFields = ['name', 'mobileNo', 'address', 'studentName','studentMobileNo', 'department','hostelRoomNo', 'inTime','outTime' ]; // Add relevant fields here
+
+      // Construct a dynamic query to search specified fields using $or operator
+      const orQuery = searchFields.map(field => ({ [field]: { $regex: new RegExp(searchQuery, 'i') } }));
+      searchCriteria.$or = orQuery;
+    }
+
+    const results = await studentVisitor.find(searchCriteria);
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+router.get('/search/v', async (req, res) => {
+  const searchQuery = req.query.q;
+
+  try {
+    const searchCriteria = {};
+
+    if (searchQuery) {
+      // Define specific fields to search within
+      const searchFields = ['name', 'mobileNo', 'comingFrom', 'vehicleNo','whomToMeet', 'inTime','outTime' ]; // Add relevant fields here
+
+      // Construct a dynamic query to search specified fields using $or operator
+      const orQuery = searchFields.map(field => ({ [field]: { $regex: new RegExp(searchQuery, 'i') } }));
+      searchCriteria.$or = orQuery;
+    }
 
     const results = await studentVisitor.find(searchCriteria);
     res.json(results);
@@ -36,8 +63,62 @@ router.get('/search', async (req, res) => {
 });
 */
 
+router.get('/search/v',userVerification, async (req, res) => {
+  const searchQuery = req.query.q;
+  try {
+    const searchCriteria = {};
 
-  
+    if (searchQuery) {
+      const stringFields = ['name', 'mobileNo', 'comingFrom', 'vehicleNo','whomToMeet', 'inTime','outTime' ];  // Fields that contain strings
+      const dateFields = ['date'];
+
+      const stringQueries = stringFields.map(field => ({ [field]: { $regex: new RegExp(searchQuery, 'i') } }));
+
+      const isDate = Date.parse(searchQuery);
+      if (!isNaN(isDate)) {
+        const dateQuery = dateFields.map(field => ({ [field]: new Date(searchQuery) }));
+        searchCriteria.$or = [...dateQuery];
+      } else if (stringQueries.length > 0) {
+        searchCriteria.$or = stringQueries;
+      }
+    }
+
+    const results = await Visitor.find(searchCriteria);
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+router.get('/search/s', userVerification, async (req, res) => {
+  const searchQuery = req.query.q;
+  try {
+    const searchCriteria = {};
+
+    if (searchQuery) {
+      const stringFields = ['name', 'mobileNo', 'address', 'studentName', 'studentMobileNo', 'department', 'hostelRoomNo', 'inTime', 'outTime']; // Fields that contain strings
+      const dateFields = ['date'];
+
+      const stringQueries = stringFields.map(field => ({ [field]: { $regex: new RegExp(searchQuery, 'i') } }));
+
+      const isDate = Date.parse(searchQuery);
+      if (!isNaN(isDate)) {
+        const dateQuery = dateFields.map(field => ({ [field]: new Date(searchQuery) }));
+        searchCriteria.$or = [...dateQuery];
+      } else if (stringQueries.length > 0) {
+        searchCriteria.$or = stringQueries;
+      }
+    }
+
+    const results = await studentVisitor.find(searchCriteria);
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 // Get current visitors - Requires admin authentication
 router.get('/current',userVerification, async (req, res) => {
     try {

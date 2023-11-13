@@ -9,6 +9,7 @@ const PreviousVisitors = () => {
   const [previousVisitors, setPreviousVisitors] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
   const [cookies] = useCookies(['token']);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const token = cookies.token;
@@ -34,9 +35,31 @@ const PreviousVisitors = () => {
     }
   }, [cookies]);
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    const token = cookies.token;
+    // Fetch visitors based on the search query
+    axios.get(`http://localhost:3001/visitor/search/v?q=${e.target.value}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setPreviousVisitors(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div>
       <h2>Previous Visitors</h2>
+      <input 
+        type="text" 
+        placeholder="Search..." 
+        value={searchQuery} 
+        onChange={handleSearch} 
+      />
       <table className="visitor-table">
         <thead>
           <tr>
@@ -53,7 +76,9 @@ const PreviousVisitors = () => {
         <tbody>
           {Array.isArray(previousVisitors) ? ( // Display a loading message when data is being fetched
            
-            previousVisitors.map((visitor) => (
+            previousVisitors
+            .filter(visitor => visitor.outTime != "")
+            .map((visitor) => (
               <tr key={visitor._id}>
                 <td>{visitor.name}</td>
                 <td>{visitor.mobileNo}</td>

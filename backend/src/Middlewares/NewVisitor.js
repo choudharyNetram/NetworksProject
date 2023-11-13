@@ -2,9 +2,16 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/UserModel");
 
 module.exports.userVerification = async (req, res, next) => {
-  const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-
-  if (!token) {
+  const token1 = req.headers.authorization && req.headers.authorization.split(' ')[1];
+  const token2 =  req.cookies.token ; 
+  let token ; 
+  if(token1){
+    token = token1 ; 
+  }
+  if(token2){
+    token = token2 ; 
+  }
+  if (!token ){
     return res.status(401).json({ status: false, message: 'Unauthorized' });
   }
 
