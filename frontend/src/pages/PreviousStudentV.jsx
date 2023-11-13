@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/visitors.css' ; 
 import '../styles/all.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 import { useCookies } from 'react-cookie';
 
@@ -9,6 +10,7 @@ const PreviousStudentVisitors = () => {
   const [previousStudentVisitors, setPreviousStudentVisitors] = useState([]);
   const [cookies] = useCookies(['token']);
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate(); // Get navigate for navigation
 
   useEffect(() => {
     const token = cookies.token;
@@ -27,9 +29,9 @@ const PreviousStudentVisitors = () => {
           console.error(error);
         });
     } else {
-      // Handle unauthorized access
+      navigate('/login'); // Redirect to the login page when there's no token
     }
-  }, [cookies]);
+  }, [cookies, navigate]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -75,7 +77,7 @@ const PreviousStudentVisitors = () => {
         <tbody>
           {Array.isArray(previousStudentVisitors) ? (
             previousStudentVisitors
-            .filter(visitor => visitor.outTime != "")
+            .filter(visitor => visitor.outTime !== "")
             .map((visitor) => (
               <tr key={visitor._id}>
                 <td>{visitor.date.split('T')[0]}</td>

@@ -5,34 +5,36 @@ import '../styles/visitors.css' ;
 import '../styles/all.css';
 
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 const CurrentStudentVisitors = () => {
   const [currentStudentVisitors, setStudentCurrentVisitors] = useState([]);
   const[cookies] = useCookies(['token']) ; 
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate(); // Get navigate for navigation
+
   const handleCheckout = (visitorId) => {
-    // Implement checkout functionality here
     const currentDateTime = new Date();
     const outTime = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const checkoutData = {
-      visitorId: visitorId, // Replace with the actual visitor ID field name
+      visitorId: visitorId,
       outTime: outTime,
     };
     
-    // Send a request to update the visitor with the checkout data
     axios
       .put(`http://localhost:3001/visitor/checkout/${visitorId}`, checkoutData)
       .then((response) => {
-        // Handle a successful response (e.g., update the state)
+        const updatedVisitors = currentStudentVisitors.map(visitor =>
+          visitor._id === visitorId ? { ...visitor, outTime } : visitor
+        );
+        setStudentCurrentVisitors(updatedVisitors);
         console.log('Visitor checked out:', response.data);
       })
       .catch((error) => {
-        // Handle errors, e.g., show an error message
         console.error('Error checking out visitor:', error);
       });
-    
   };
-  
+
   useEffect(() => {
     const token = cookies.token ; 
 
@@ -50,7 +52,10 @@ const CurrentStudentVisitors = () => {
         console.error(error) ; 
       });
   }
-  }, [cookies]);
+  else {
+    navigate('/login');
+  }
+  }, [cookies, navigate]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -108,9 +113,8 @@ const CurrentStudentVisitors = () => {
               <td>{visitor.address}</td>
               <td>{visitor.inTime}</td>
               <td>
-              <button onClick={() => handleCheckout(visitor._id)}>Checkout</button>
-            </td>
-
+                <button onClick={() => handleCheckout(visitor._id)} className="customButton">Checkout</button>
+              </td>
             </tr>
           ))}
         </tbody>
