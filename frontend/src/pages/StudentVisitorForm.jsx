@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/all.css';
 import '../styles/visitorform.css' ; 
@@ -14,7 +14,11 @@ const StudentVisitorForm = () => {
     hostelRoomNo: '' , 
     inTime: '',   // Change to 24-hour format, e.g., "14:30"
     outTime: '',  // Change to 24-hour format, e.g., "14:30"
+    timestamp: '' , 
   });
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [notification, setNotification] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +54,7 @@ const StudentVisitorForm = () => {
       hostelRoomNo: formData.hostelRoomNo , 
       inTime: currentTime,   // Use the user's input
       outTime: "", // Use the user's input
+      datetime: currentDateTime , 
     };
 
     // Send a POST request to the server
@@ -57,13 +62,26 @@ const StudentVisitorForm = () => {
       .post('http://localhost:3001/visitor/add-student-visitor', data)
       .then((response) => {
         // Handle a successful response, e.g., show a success message
-        console.log('Data saved:', response.data);
+        setNotification({ type: 'success', message: 'Entry submitted successfully!' });
+        setSuccessMessage('Entry submitted successfully!');
+        setErrorMessage('');
+         window.location.reload();
       })
       .catch((error) => {
         // Handle errors, e.g., show an error message
+        setNotification({ type: 'error', message: 'Error submitting the form. Please try again.' });
+        setSuccessMessage('');
+        setErrorMessage('Error submitting the form. Please try again.');
         console.error('Error:', error);
       });
   };
+  useEffect(() => {
+    const notificationTimeout = setTimeout(() => {
+      setNotification(null);
+    }, 5000); // Notification will disappear after 5 seconds
+
+    return () => clearTimeout(notificationTimeout);
+  }, [notification]);
 
   return (
     <div className="form-container">
@@ -135,6 +153,13 @@ const StudentVisitorForm = () => {
         </div>
         
         <button type="submit">Submit</button>
+        {/* Success and error messages */}
+        {notification && (
+          <div className={`notification ${notification.type}`}>
+            {notification.message}
+          </div>
+        )}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
       </form>
     </div>
   );

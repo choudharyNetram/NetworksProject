@@ -1,4 +1,51 @@
+/* visitors.css */
+
+.visitor-container {
+  width: 100%;
+  padding-top: 50px; /* Adjust based on your navbar height */
+}
+
+.table-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 50px); /* Adjust to consider the navbar height */
+}
+
 .visitor-table {
+  width: auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.visitor-table th,
+.visitor-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.visitor-table th {
+  background-color: #f2f2f2;
+}
+
+.visitor-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.visitor-table tr:hover {
+  background-color: #ddd;
+}
+
+.customButton {
+  background-color: rgb(0, 179, 255);
+  color: white;
+}
+
+
+
+/*.visitor-table {
     border-collapse: collapse;
     width: 100%;
   }
@@ -22,7 +69,6 @@
   }
   
 
-  /* Add this CSS to your stylesheets or inline style in your React component */
   
   .data-table {
     border-collapse: collapse;
@@ -44,8 +90,6 @@
     background-color: #f9f9f9;
   }
   
-  /* Add more styling as needed to match your UI design. */
-  /* Add this CSS to your stylesheets or inline style in your React component */
   
   .data-table {
     border-collapse: collapse;
@@ -72,3 +116,50 @@
   color: white;
   
 }
+
+.visitor-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-y: auto;
+}
+
+.visitor-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.visitor-table th, .visitor-table td {
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .visitor-container, .table-container, .visitor-table {
+    overflow-x: auto;
+  }
+}
+
+.visitor-container {
+  width: 100%;
+  padding-top: 50px; 
+}
+
+.table-container {
+  overflow: auto;
+  max-height: calc(100vh - 50px); 
+}
+
+.visitor-table {
+  width: 100%;
+ 
+}
+
+*/

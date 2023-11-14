@@ -12,6 +12,8 @@ const studentVisitorSchema = new mongoose.Schema({
   hostelRoomNo: { type: String  },
   inTime: { type: String },
   outTime: { type: String },
+  timestamp: { type: Number },
+  datetime: {type: Date} , 
 });
 
 // Create a Mongoose model for the Student related visitors data

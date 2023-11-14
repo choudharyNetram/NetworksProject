@@ -12,6 +12,8 @@ module.exports.addVisitor = async (req, res) => {
       whomToMeet,
       inTime, // String format: "hh:mm AM/PM"
       outTime, // String format: "hh:mm AM/PM"
+      timestamp , 
+      datetime , 
     } = req.body;
 
     // Create a new visitor record with the input data
@@ -24,6 +26,8 @@ module.exports.addVisitor = async (req, res) => {
       whomToMeet,
       inTime,
       outTime,
+      timestamp , 
+      datetime , 
     });
 
     // Save the new visitor record to the database
@@ -49,6 +53,8 @@ module.exports.addStudentVisitor = async (req, res) => {
       hostelRoomNo , 
       inTime, // String format: "hh:mm AM/PM"
       outTime, // String format: "hh:mm AM/PM"
+      timestamp , 
+      datetime, 
     } = req.body;
 
     // Create a new visitor record with the input data
@@ -62,7 +68,9 @@ module.exports.addStudentVisitor = async (req, res) => {
       department, 
       hostelRoomNo , 
       inTime, // String format: "hh:mm AM/PM"
-      outTime
+      outTime ,
+      timestamp ,
+      datetime,
     });
 
     // Save the new visitor record to the database
