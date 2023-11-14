@@ -23,7 +23,8 @@ const PreviousStudentVisitors = () => {
           },
         })
         .then((response) => {
-          setPreviousStudentVisitors(response.data);
+          const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          setPreviousStudentVisitors(sortedData);
         })
         .catch((error) => {
           console.error(error);

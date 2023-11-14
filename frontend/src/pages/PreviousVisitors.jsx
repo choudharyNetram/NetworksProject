@@ -22,7 +22,8 @@ const PreviousVisitors = () => {
           },
         })
         .then((response) => {
-          setPreviousVisitors(response.data);
+          const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          setPreviousVisitors(sortedData);
           setLoading(false);
         })
         .catch((error) => {
