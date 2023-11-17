@@ -12,6 +12,7 @@
   max-height: calc(100vh - 50px); /* Adjust to consider the navbar height */
 }
 
+
 .visitor-table {
   width: auto;
   border-collapse: collapse;
@@ -44,7 +45,12 @@
 }
 
 
-
+h2{
+  text-align: center;
+  padding-bottom: 0.5rem;
+  
+  color: rgb(4, 16, 19);
+}
 /*.visitor-table {
     border-collapse: collapse;
     width: 100%;

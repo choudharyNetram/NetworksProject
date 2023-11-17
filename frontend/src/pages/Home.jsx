@@ -38,15 +38,19 @@ const Home = () => {
     navigate("/signup");
   };
   return (
+      
+
+
     <>
       <div className="home_page">
+      <h2>Visitor Management System</h2>
         <h4>
           {" "}
-          Welcome Admin <span>{adminName}</span>
+          Welcome Admin <span>{username}</span>
         </h4>
         
         <div>
-        <h2>Visitor Management System</h2>
+       
         <Link to="/current-visitors">
           <button>Currently Inside Campus</button>
         </Link>
